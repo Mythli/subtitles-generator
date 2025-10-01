@@ -1,4 +1,5 @@
 'use strict';
+import { test, expect } from 'vitest';
 import divideIntoTwoLines from './index.js';
 
 var sampleText = `Hi there, my name is Ian police -

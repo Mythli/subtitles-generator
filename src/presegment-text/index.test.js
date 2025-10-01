@@ -1,3 +1,4 @@
+import { test, expect } from 'vitest';
 import fs from 'fs';
 import preSegmentText from './index.js';
 // requrie on js and json is relative to current file path

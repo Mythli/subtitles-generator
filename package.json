@@ -11,9 +11,9 @@
     ".": "./src/index.js"
   },
   "scripts": {
-    "test": "NODE_OPTIONS=--experimental-vm-modules jest",
-    "test:watch": "NODE_OPTIONS=--experimental-vm-modules jest --watchAll",
-    "test:ci": "NODE_OPTIONS=--experimental-vm-modules jest --ci",
+    "test": "vitest",
+    "test:watch": "vitest watch",
+    "test:ci": "vitest run",
     "start": "node example-usage.js"
   },
   "author": "",
@@ -24,7 +24,7 @@
   },
   "devDependencies": {
     "eslint": "^9.36.0",
-    "jest": "^24.9.0"
+    "vitest": "^1.6.0"
   },
   "bugs": {
     "url": "https://github.com/your-github-username/subtitles-generator/issues"
@@ -34,7 +34,4 @@
     "type": "git",
     "url": "git+https://github.com/your-github-username/subtitles-generator.git"
   },
-  "jest": {
-    "testEnvironment": "node"
-  }
 }

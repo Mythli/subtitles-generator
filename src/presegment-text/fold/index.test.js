@@ -1,4 +1,5 @@
 'use strict';
+import { test, expect } from 'vitest';
 import foldWords from './index.js';
 
 const sampleText = `Hi there, my name is Ian police - are recording this video to talk about mercury for the folks at a tech daily conference in New York.
