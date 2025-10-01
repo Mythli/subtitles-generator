@@ -1,5 +1,5 @@
 {
-  "name": "subtitles-generator",
+  "name": "subtitles-generator2",
   "version": "1.0.1",
   "description": "A node module to generate subtitles by segmenting a list of time-coded text.",
   "main": "src/index.js",
