@@ -1,4 +1,4 @@
-# Subtitles Generator - draft 
+# Subtitles Generator
 
 A node module to generate subtitles by segmenting a list of time-coded text.
 
@@ -23,20 +23,20 @@ git clone, cd into folder, `npm install`
 ## Usage
 
 ```js
-const subtitlesComposer = require('./src/index.js');
+import subtitlesGenerator from './src/index.js';
 // const sampleWords = // some word json 
-const subtitlesJson = subtitlesComposer({words: sampleWords, type: 'json'})
-const ttmlPremiere = subtitlesComposer({words: sampleWords, type: 'premiere'})
-const ittData = subtitlesComposer({words: sampleWords, type: 'itt'})
-const ttmlData = subtitlesComposer({words: sampleWords, type: 'ttml'})
-const srtData = subtitlesComposer({words: sampleWords, type: 'srt'})
-const vttData = subtitlesComposer({words: sampleWords, type: 'vtt'})
+const subtitlesJson = subtitlesGenerator({words: sampleWords, type: 'json'})
+const ttmlPremiere = subtitlesGenerator({words: sampleWords, type: 'premiere'})
+const ittData = subtitlesGenerator({words: sampleWords, type: 'itt'})
+const ttmlData = subtitlesGenerator({words: sampleWords, type: 'ttml'})
+const srtData = subtitlesGenerator({words: sampleWords, type: 'srt'})
+const vttData = subtitlesGenerator({words: sampleWords, type: 'vtt'})
 ```
 see [`example-usage.js`](./example-usage.js) for more comprehensive example.
 
 To try locally
 ```
-npx babel-node example-usage.js
+node example-usage.js
 ```
 
 ### `words` Input 
@@ -100,8 +100,10 @@ In pseudo code, at a high level
 // return trsult
 ```
 
-Segmentation algorithm refactored from [`pietrop/subtitlesComposer`](https://github.com/pietrop/subtitlesComposer) originally by [@polizoto](https://github.com/polizoto). 
-And subtitles generation in various originally format by [`@laurian`](https://github.com/laurian) and [`@maboa`](https://github.com/maboa)as part of BBC Subtitlelizer project.
+This project is a fork of the original BBC Subtitlelizer project. It has been updated with modern dependencies, converted to ESM, and uses Vitest for testing.
+
+The original segmentation algorithm was refactored from [`pietrop/subtitlesComposer`](https://github.com/pietrop/subtitlesComposer) by [@polizoto](https://github.com/polizoto).
+Subtitles generation in various formats was originally by [`@laurian`](https://github.com/laurian) and [`@maboa`](https://github.com/maboa).
 
 ## Development env
  <!-- _How to run the development environment_
@@ -109,9 +111,8 @@ _Coding style convention ref optional, eg which linter to use_
 _Linting, github pre-push hook - optional_ -->
 
 - npm > `6.1.0`
-- [Node 10 - dubnium](https://scotch.io/tutorials/whats-new-in-node-10-dubnium)
+- Node 16+
 - [Eslint](https://eslint.org/)
-- [Babel](https://babeljs.io/)
 
 Node version is set in node version manager [`.nvmrc`](https://github.com/creationix/nvm#nvmrc)
 
@@ -122,11 +123,11 @@ Node version is set in node version manager [`.nvmrc`](https://github.com/creati
 npm run build
 ```
 
-uses [babel-cli](https://babeljs.io/docs/en/babel-cli) to transpile ES6 into the `./build` folder.
-
 
 ## Tests
 <!-- _How to carry out tests_ -->
+
+This project uses [Vitest](https://vitest.dev/) for testing.
 
 ```
 npm test
@@ -153,7 +154,7 @@ npm run lint:fix
 ## Deployment
 <!-- _How to deploy the code/app into test/staging/production_ -->
 
-_coming soon, deploying to npm registry as [@bbc/subtitles-composer]()_
+This package is ready to be published to npm.
 
 ```
 npm run publish:public
@@ -162,6 +163,5 @@ npm run publish:public
 ---
 
 # TODO
-- [ ] Open source
-- [x] use import/export in modules 
-- [x] add babel 
+- [x] Open source
+- [x] use import/export in modules
