@@ -1,5 +1,5 @@
 {
-  "name": "subtitles-generator2",
+  "name": "@mythli/subtitles-generator2",
   "version": "1.0.2",
   "description": "A node module to generate subtitles by segmenting a list of time-coded text.",
   "main": "src/index.js",
