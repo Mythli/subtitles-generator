@@ -20,11 +20,11 @@
   "license": "MIT",
   "dependencies": {
     "sbd": "^1.0.19",
-    "smpte-timecode": "^1.2.3"
+    "smpte-timecode": "^1.3.6"
   },
   "devDependencies": {
-    "eslint": "^9.7.0",
-    "vitest": "^2.0.3"
+    "eslint": "^9.36.0",
+    "vitest": "^3.2.4"
   },
   "bugs": {
     "url": "https://github.com/your-github-username/subtitles-generator/issues"
