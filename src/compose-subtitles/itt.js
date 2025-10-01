@@ -1,7 +1,13 @@
 import tcFormat from './util/tc-format.js';
 import escapeText from './util/escape-text.js';
 
-const ittGenerator = (vttJSON, lang = 'en-GB', FPS = 25) => {
+interface SubtitleLine {
+  start: number;
+  end: number;
+  text: string;
+}
+
+const ittGenerator = (vttJSON: SubtitleLine[], lang = 'en-GB', FPS = 25): string => {
   let ittOut =
       `<?xml version="1.0" encoding="UTF-8"?>
         <tt
@@ -40,7 +46,7 @@ const ittGenerator = (vttJSON, lang = 'en-GB', FPS = 25) => {
         <body style="normal" region="bottom">
           <div begin="-01:00:00:00">`;
   vttJSON.forEach((v) => {
-    ittOut += `<p begin="${ tcFormat(parseFloat(v.start) * FPS, FPS) }" end="${ tcFormat(parseFloat(v.end) * FPS, FPS) }">${ escapeText(v.text).replace(/\n/g, '<br />') }</p>\n`;
+    ittOut += `<p begin="${ tcFormat(v.start * FPS, FPS) }" end="${ tcFormat(v.end * FPS, FPS) }">${ escapeText(v.text).replace(/\n/g, '<br />') }</p>\n`;
   });
   ittOut += '</div>\n</body>\n</tt>';
 

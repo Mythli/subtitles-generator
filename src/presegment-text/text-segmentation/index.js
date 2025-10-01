@@ -1,14 +1,14 @@
 'use strict';
 import tokenizer from 'sbd';
 
-function textSegmentation(text, honorifics) {
-  var optionalHonorifics = null;
+function textSegmentation(text: string, honorifics?: string[]): string {
+  let optionalHonorifics: string[] | undefined = undefined;
 
   if (honorifics !== undefined) {
     optionalHonorifics = honorifics;
   }
 
-  var options = {
+  const options = {
 	    'newline_boundaries': true,
 	    'html_boundaries': false,
 	    'sanitize': false,
@@ -18,8 +18,8 @@ function textSegmentation(text, honorifics) {
 	    'abbreviations': optionalHonorifics
   };
 
-  var sentences = tokenizer.sentences(text, options);
-  var sentencesWithLineSpaces = sentences.join('\n');
+  const sentences = tokenizer.sentences(text, options);
+  const sentencesWithLineSpaces = sentences.join('\n');
 
   return sentencesWithLineSpaces;
 }

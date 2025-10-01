@@ -1,4 +1,10 @@
-function csvGenerator(srtJsonContent) {
+interface SubtitleLine {
+  start: number;
+  end: number;
+  text: string;
+}
+
+function csvGenerator(srtJsonContent: SubtitleLine[]): string {
   let lines = 'N, In, Out, Text\n';
   srtJsonContent.forEach((srtLineO, index) => {
     lines += `${ index + 1 },`;

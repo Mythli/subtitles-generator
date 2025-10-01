@@ -3,12 +3,19 @@ import addLineBreakBetweenSentences from './line-break-between-sentences/index.j
 import foldWords from './fold/index.js';
 import divideIntoTwoLines from './divide-into-two-lines/index.js';
 
+interface Word {
+  id?: number;
+  start: number;
+  end: number;
+  text: string;
+}
+
 /**
  * Takes in array of word object,
  *  and returns string containing all the text
  * @param {array} words - Words
  */
-function getTextFromWordsList(words) {
+function getTextFromWordsList(words: Word[]): string {
   return words.map((word) => {return word.text;}).join(' ');
 }
 
@@ -16,10 +23,12 @@ function getTextFromWordsList(words) {
  *
  * @param {*} textInput - can be either plain text string or an array of word objects
  */
-function preSegmentText(textInput, tmpNumberOfCharPerLine = 35) {
-  let text = textInput;
-  if (typeof textInput === 'object') {
+function preSegmentText(textInput: Word[] | string, tmpNumberOfCharPerLine = 35): string {
+  let text: string;
+  if (Array.isArray(textInput)) {
     text = getTextFromWordsList(textInput);
+  } else {
+    text = textInput;
   }
   const segmentedText = textSegmentation(text);
   // - 2.Line brek between stentences

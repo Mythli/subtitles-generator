@@ -1,6 +1,6 @@
 'use strict';
 
-function addLineBreakBetweenSentences(text) {
+function addLineBreakBetweenSentences(text: string): string {
   return text.replace(/\n/g, '\n\n');
 }
 

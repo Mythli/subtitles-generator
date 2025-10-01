@@ -1,7 +1,13 @@
 import escapeText from './util/escape-text.js';
 import formatSeconds from './util/format-seconds.js';
 
-const ttmlGeneratorPremiere = (vttJSON) => {
+interface SubtitleLine {
+  start: number;
+  end: number;
+  text: string;
+}
+
+const ttmlGeneratorPremiere = (vttJSON: SubtitleLine[]): string => {
   let ttmlOut = `<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
     <tt xmlns="http://www.w3.org/ns/ttml"
     xmlns:ttp="http://www.w3.org/ns/ttml#parameter"
@@ -18,7 +24,7 @@ const ttmlGeneratorPremiere = (vttJSON) => {
     </head>
     <body><div>`;
   vttJSON.forEach((v) => {
-    ttmlOut += `<p begin="${ formatSeconds(parseFloat(v.start)) }" end="${ formatSeconds(parseFloat(v.end)) }">${ escapeText(v.text).replace(/\n/g, '<br />') }</p>\n`;
+    ttmlOut += `<p begin="${ formatSeconds(v.start) }" end="${ formatSeconds(v.end) }">${ escapeText(v.text).replace(/\n/g, '<br />') }</p>\n`;
   });
   ttmlOut += '</div>\n</body>\n</tt>';
 

@@ -1,18 +1,18 @@
 'use strict';
 import removeSpaceAtBeginningOfLine from '../util/remove-space-at-beginning-of-line.js';
 
-function divideIntoTwoLines(text) {
-  var lines = text.split('\n');
+function divideIntoTwoLines(text: string): string {
+  const lines = text.split('\n');
 
-  var counter = 0;
+  let counter = 0;
 
-  var result = lines.map((l) => {
+  const result = lines.map((l) => {
     if (l === '') {
       return l;
     } else {
       if (counter === 0) {
         counter += 1;
-        if (l[l.length - 1][0] === '.') {
+        if (l[l.length - 1] === '.') {
           return l + '\n\n';
         }
 
@@ -25,13 +25,15 @@ function divideIntoTwoLines(text) {
     }
   });
 
-  result = removeSpaceAtBeginningOfLine(result);
+  let stringResult = result.filter((r): r is string => r !== undefined);
+
+  stringResult = removeSpaceAtBeginningOfLine(stringResult);
   // remove empty lines from list to avoid unwanted space a beginning of line
-  result = result.filter(line => line.length !== 0);
+  stringResult = stringResult.filter(line => line.length !== 0);
 
-  result = result.join('').trim();
+  const finalResult = stringResult.join('').trim();
 
-  return result;
+  return finalResult;
 }
 
 export default divideIntoTwoLines;

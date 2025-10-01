@@ -8,16 +8,16 @@ import removeSpaceAfterCarriageReturn from '../util/remove-space-after-carriage-
   * foldNumber = char after which to fold. eg 35 char default
   * TODO: this could be refactored with smaller helper functions
   */
-function foldWordsReturnArray(textArray, foldNumber = 35) {
-  var counter = 0;
-  var result = textArray.map((word, index, list) => {
+function foldWordsReturnArray(textArray: string[], foldNumber = 35): string[] {
+  let counter = 0;
+  const result = textArray.map((word, index, list) => {
     counter += word.length + 1;
     //resetting counter when there is a 'paragraph' line break \n\n
     if (counter <= foldNumber) {
     // if not last word in list
     // cover edge case last element in array does not have a next element
       if (list[index + 1] !== undefined) {
-        var nextElementLength = list[index + 1].length;
+        const nextElementLength = list[index + 1].length;
         //check if adding next word would make the line go over the char limit foldNumber
         if ((counter + nextElementLength) < foldNumber) {
           return word;
@@ -46,15 +46,15 @@ function foldWordsReturnArray(textArray, foldNumber = 35) {
 * text string of words
 * foldNumber = char after which to fold. eg 35 char.
 */
-function foldWords(text, foldNumber) {
+function foldWords(text: string, foldNumber: number): string {
   // split on two line break
-  var lineArr = text.split('\n\n');
+  const lineArr = text.split('\n\n');
   // fold each line on non fold number char count
-  var foldedWordsInArray = lineArr.map((line) => {
+  const foldedWordsInArray = lineArr.map((line) => {
   	return foldWordsReturnArray(line.split(' '), foldNumber);
   });
   // flatten result
-  var foldedWordsFlatten = foldedWordsInArray.map((line) => {
+  const foldedWordsFlatten = foldedWordsInArray.map((line) => {
     return line.join(' ');
   });
 
