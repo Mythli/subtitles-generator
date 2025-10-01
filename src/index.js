@@ -12,7 +12,20 @@ import srtGenerator from './compose-subtitles/srt.js';
 import vttGenerator from './compose-subtitles/vtt.js';
 import csvGenerator from './compose-subtitles/csv.js';
 
-function segmentedTextToList(text) {
+export interface Word {
+  id?: number;
+  start: number;
+  end: number;
+  text: string;
+}
+
+export interface SubtitleLine {
+  start: number;
+  end: number;
+  text: string;
+}
+
+function segmentedTextToList(text: string): string[] {
   let result = text.split('\n\n');
   result = result.map(line => {
     return line.trim();
@@ -21,7 +34,7 @@ function segmentedTextToList(text) {
   return result;
 }
 
-function countWords(text) {
+function countWords(text: string): number {
   return text
     .trim()
     .replace(/\n /g, '')
@@ -29,38 +42,52 @@ function countWords(text) {
     .split(' ').length;
 }
 
-function countList(list) {
-  return list.length - 1;
-}
-
-function addTimecodesToLines(wordsList, lines) {
+function addTimecodesToLines(wordsList: Word[], lines: string[]): SubtitleLine[] {
   let startWordCounter = 0;
   let endWordCounter = 0;
   const results = lines.map((line) => {
     endWordCounter += countWords(line);
-    const jsonLine = { text: line.trim() };
+    const jsonLine: Partial<SubtitleLine> = { text: line.trim() };
     jsonLine.start = wordsList[startWordCounter].start;
     jsonLine.end = wordsList[endWordCounter - 1].end;
     startWordCounter = endWordCounter;
 
-    return jsonLine;
+    return jsonLine as SubtitleLine;
   });
 
   return results;
 }
 
-function preSegmentTextJson(wordsList, numberOfCharPerLine) {
+function preSegmentTextJson(wordsList: Word[], numberOfCharPerLine?: number): SubtitleLine[] {
   const result = preSegmentText(wordsList, numberOfCharPerLine);
   const segmentedTextArray = segmentedTextToList(result);
 
   return addTimecodesToLines(wordsList, segmentedTextArray);
 }
 
-function subtitlesComposer({ words, type, numberOfCharPerLine }) {
-  const subtitlesJson = preSegmentTextJson(words, numberOfCharPerLine);
+type SubtitleType = 'premiere' | 'ttml' | 'itt' | 'srt' | 'vtt' | 'json' | 'csv' | 'pre-segment-txt' | 'txt';
+
+interface SubtitlesComposerParams {
+  words: Word[] | string;
+  type?: SubtitleType;
+  numberOfCharPerLine?: number;
+}
+
+type SubtitlesComposerResult = string | SubtitleLine[] | {
+  ttml: string;
+  premiere: string;
+  itt: string;
+  srt: string;
+  vtt: string;
+  json: SubtitleLine[];
+};
+
+function subtitlesComposer({ words, type, numberOfCharPerLine }: SubtitlesComposerParams): SubtitlesComposerResult {
   if (typeof words === 'string') {
     return preSegmentText(words, numberOfCharPerLine);
   }
+  const subtitlesJson = preSegmentTextJson(words, numberOfCharPerLine);
+
   switch (type) {
   case 'premiere':
     return ttmlGeneratorPremiere(subtitlesJson);
