@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "description": "A node module to generate subtitles by segmenting a list of time-coded text.",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "jest",
-    "test:watch": "jest --watchAll",
-    "test:ci": "jest --ci",
+    "test": "node --experimental-vm-modules ./node_modules/.bin/jest",
+    "test:watch": "node --experimental-vm-modules ./node_modules/.bin/jest --watchAll",
+    "test:ci": "node --experimental-vm-modules ./node_modules/.bin/jest --ci",
     "start": "node example-usage.js"
   },
   "author": "",

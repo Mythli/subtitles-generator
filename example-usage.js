@@ -1,6 +1,7 @@
 import fs from 'fs';
 import subtitlesGenerator from './src/index.js';
-import transcript from './sample/words-list.sample.json';
+
+const transcript = JSON.parse(fs.readFileSync('./sample/words-list.sample.json'));
 const sampleWords = transcript.words;
 
 function getTextFromWordsList(words) {
