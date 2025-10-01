@@ -35,6 +35,6 @@
     "url": "git+https://github.com/your-github-username/subtitles-generator.git"
   },
   "jest": {
-    "transform": {}
+    "testEnvironment": "node"
   }
 }
