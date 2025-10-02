@@ -33,11 +33,11 @@
     "vitest": "^3.2.4"
   },
   "bugs": {
-    "url": "https://github.com/your-github-username/subtitles-generator/issues"
+    "url": "https://github.com/Mythli/subtitles-generator/issues"
   },
-  "homepage": "https://github.com/your-github-username/subtitles-generator",
+  "homepage": "https://github.com/Mythli/subtitles-generator",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/your-github-username/subtitles-generator.git"
+    "url": "git+https://github.com/Mythli/subtitles-generator.git"
   }
 }
