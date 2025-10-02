@@ -13,18 +13,33 @@ Exports to
 
 It can also provide pre-segmented lines if the input is plain text.
 
-## Setup
-<!-- _stack - optional_
-_How to build and run the code/app_ -->
+## Getting Started
 
-git clone, cd into folder, `npm install`
+Install from npm:
+
+```bash
+npm install @mythli/subtitles-generator2
+```
+
+See the package on npm: https://www.npmjs.com/package/@mythli/subtitles-generator2
+
+### For local development
+
+Clone the repository and install dependencies:
+
+```bash
+git clone https://github.com/Mythli/subtitles-generator.git
+cd subtitles-generator
+pnpm install
+```
 
 
 ## Usage
 
-```js
-import subtitlesGenerator from './src/index.js';
-// const sampleWords = // some word json 
+```typescript
+import subtitlesGenerator, { Word } from '@mythli/subtitles-generator2';
+
+// const sampleWords: Word[] = // some word json 
 const subtitlesJson = subtitlesGenerator({words: sampleWords, type: 'json'})
 const ttmlPremiere = subtitlesGenerator({words: sampleWords, type: 'premiere'})
 const ittData = subtitlesGenerator({words: sampleWords, type: 'itt'})
@@ -32,18 +47,20 @@ const ttmlData = subtitlesGenerator({words: sampleWords, type: 'ttml'})
 const srtData = subtitlesGenerator({words: sampleWords, type: 'srt'})
 const vttData = subtitlesGenerator({words: sampleWords, type: 'vtt'})
 ```
-see [`example-usage.js`](./example-usage.js) for more comprehensive example.
+see [`example-usage.ts`](./example-usage.ts) for a more comprehensive example.
 
-To try locally
-```
-node example-usage.js
+To try locally:
+```bash
+pnpm start
 ```
 
 ### `words` Input 
-- either an array list of words objects    
+- either an array list of words objects (`Word[]`)
 example
-```js
-const sampleWords =[ 
+```typescript
+import { Word } from '@mythli/subtitles-generator2';
+
+const sampleWords: Word[] = [ 
       {
         "id": 0,
         "start": 13.02,
@@ -72,8 +89,8 @@ const sampleWords =[
 ```
 - or a string of text     
 Example
-```js
-const sampleWords = "There is a day. ..."
+```typescript
+const sampleWords: string = "There is a day. ...";
 ```
 
 If input `words` is plain text only (and not a list of words with timecodes) then can only use `pre-segment-txt` option. (see [`test-presegment.txt`](./example-output/test-presegment.txt) for example)
@@ -100,7 +117,7 @@ In pseudo code, at a high level
 // return trsult
 ```
 
-This project is a fork of the original BBC Subtitlelizer project. It has been updated with modern dependencies, converted to ESM, and uses Vitest for testing.
+This project is a fork of the original BBC Subtitlelizer project. It has been updated with modern dependencies, converted to TypeScript, and uses Vitest for testing.
 
 The original segmentation algorithm was refactored from [`pietrop/subtitlesComposer`](https://github.com/pietrop/subtitlesComposer) by [@polizoto](https://github.com/polizoto).
 Subtitles generation in various formats was originally by [`@laurian`](https://github.com/laurian) and [`@maboa`](https://github.com/maboa).
@@ -110,9 +127,10 @@ Subtitles generation in various formats was originally by [`@laurian`](https://g
 _Coding style convention ref optional, eg which linter to use_
 _Linting, github pre-push hook - optional_ -->
 
-- npm > `6.1.0`
-- Node 16+
+- [pnpm](https://pnpm.io/)
+- Node 20+
 - [Eslint](https://eslint.org/)
+- [TypeScript](https://www.typescriptlang.org/)
 
 Node version is set in node version manager [`.nvmrc`](https://github.com/creationix/nvm#nvmrc)
 
@@ -139,26 +157,6 @@ To run tests during development
 npm run test:watch
 ```
 
-## Linting
-To run linter
-
-```
-npm run lint
-```
-
-To run and fix
-```
-npm run lint:fix
-```
-
-## Deployment
-<!-- _How to deploy the code/app into test/staging/production_ -->
-
-This package is ready to be published to npm.
-
-```
-npm run publish:public
-```
 
 ---
 
